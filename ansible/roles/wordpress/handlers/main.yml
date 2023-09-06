@@ -1,0 +1,24 @@
+---
+# handlers file for wordpress
+- name: "set_apache_service"
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+
+- name: "enable_site"
+  command: "a2ensite {{ VH_FILENAME }}.conf"
+
+- name: "reload_apache_service"
+  service:
+    name: apache2
+    state: reloaded
+
+- name: "add_static_dns_entry"
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ item }}"
+    create: yes
+  loop:
+    - "{{ inventory_hostname }} {{ WP_URL }}"
+    - "{{ inventory_hostname }} {{ WP_DOMAIN }}"

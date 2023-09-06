@@ -1,0 +1,13 @@
+---
+# tasks file for wordpress
+- name: "include_apache_file"
+  include: apache.yml
+  when: (ansible_facts['hostname'] == "wordpress")
+
+- name: "include_php_file"
+  include: php.yml
+  when: (ansible_facts['hostname'] == "wordpress")
+
+- name: "include_wordpress_file"
+  include: wordpress.yml
+  when: (ansible_facts['hostname'] == "wordpress")

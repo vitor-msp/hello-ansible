@@ -1,0 +1,21 @@
+---
+# handlers file for mysql
+- name: "set_mariadb_service"
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: "change_mariadb_bind"
+  lineinfile:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: "^bind-address.*= 127.0.0.1$"
+    line: "bind-address = 0.0.0.0"
+    state: present
+    backup: yes
+
+- name: "restart_mariadb_service"
+  service:
+    name: mariadb
+    state: restarted
+    enabled: yes

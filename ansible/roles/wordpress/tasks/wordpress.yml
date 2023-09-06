@@ -1,0 +1,27 @@
+- name: "create_wp_folder"
+  file:
+    path: "{{ WP_FOLDER }}"
+    state: directory
+    mode: "0755"
+
+- name: "check_wp_folder"
+  stat:
+    path: "{{ WP_FOLDER }}/wordpress"
+  register: wp_folder_data
+
+- debug: var=wp_folder_data.stat.path
+
+- name: "install_wordpress"
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: "{{ WP_FOLDER }}"
+    remote_src: yes
+  when: not wp_folder_data.stat.exists
+
+- name: "set_permissions"
+  file:
+    path: "{{ WP_FOLDER }}/wordpress"
+    state: directory
+    owner: www-data
+    group: www-data
+    recurse: yes

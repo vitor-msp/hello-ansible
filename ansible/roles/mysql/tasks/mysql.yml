@@ -1,0 +1,33 @@
+- name: "install_mariadb"
+  apt:
+    update_cache: yes
+    name:
+      - mariadb-server
+      - python-pymysql
+    state: present
+  notify:
+    - set_mariadb_service
+    - change_mariadb_bind
+    - restart_mariadb_service
+
+- name: "create_wordpress_db"
+  mysql_db:
+    login_unix_socket: "/var/run/mysqld/mysqld.sock"
+    name: "{{ DB_WP_NAME }}"
+    state: present
+
+- name: "set_db_access"
+  mysql_user:
+    login_unix_socket: "/var/run/mysqld/mysqld.sock"
+    name: "{{ DB_WP_USERNAME }}"
+    password: "{{ DB_WP_PASSWORD }}"
+    host: "%"
+    priv: "{{ DB_WP_NAME }}.*:ALL,GRANT"
+    state: present
+
+- name: "remove_anonymous_db_users"
+  mysql_user:
+    login_unix_socket: "/var/run/mysqld/mysqld.sock"
+    name: ""
+    host_all: yes
+    state: absent

@@ -1,0 +1,6 @@
+---
+# vars file for wordpress
+WP_FOLDER: "/var/www/wordpress-local"
+WP_URL: "www.wordpress.local"
+WP_DOMAIN: "wordpress.local"
+VH_FILENAME: "wordpress-local"

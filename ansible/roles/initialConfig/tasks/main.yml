@@ -1,0 +1,7 @@
+---
+# tasks file for initialConfig
+- name: "set_hostname"
+  hostname:
+    name: "{{ hostname }}"
+  notify:
+    - add_static_dns_entry

@@ -1,0 +1,9 @@
+---
+# handlers file for initialConfig
+- name: "add_static_dns_entry"
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ item }}"
+  with_items:
+    - "127.0.0.1 {{ hostname }}"
+    - "{{ inventory_hostname }} {{ hostname }}"

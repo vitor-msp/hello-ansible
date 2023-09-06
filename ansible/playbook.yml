@@ -1,0 +1,9 @@
+- hosts:
+    - wordpress
+    - mysql
+  become: yes
+  remote_user: ansiblewordpress
+  roles:
+    - initialConfig
+    - mysql
+    - wordpress

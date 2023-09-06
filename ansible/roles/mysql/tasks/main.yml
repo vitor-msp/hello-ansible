@@ -1,0 +1,5 @@
+---
+# tasks file for mysql
+- name: "include_mysql_file"
+  include: mysql.yml
+  when: (ansible_facts['hostname'] == "mysql")

@@ -1,0 +1,5 @@
+---
+# vars file for mysql
+DB_WP_NAME: wordpress
+DB_WP_USERNAME: wordpress
+DB_WP_PASSWORD: wordpress
