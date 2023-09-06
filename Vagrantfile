@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
             vb.memory = "512"
             vb.cpus = 1
         end
-        ansible.vm.provision "file", source: "./ansible", destination: "/tmp/ansible"
+        ansible.vm.provision "file", source: "./ansible", destination: "/tmp/ansible", run: "always"
         ansible.vm.provision "shell" do |shell|
             shell.path = "./scripts/controller.sh"
             shell.args = [USER, PASSWORD, WORDPRESS_IP, MYSQL_IP]
