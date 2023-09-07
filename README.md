@@ -22,6 +22,15 @@ cd hello-ansible
 vagrant up
 ```
 
+4. Add a static dns entry in your hosts file (run as root!)
+```
+echo "127.0.0.1 www.wordpress.local" >> /etc/hosts
+```
+
+5. Open [this link](http://www.wordpress.local:8080/wordpress)
+
+The wordpress configuration page will open and can be configured with the parameters that are in this project.
+
 ### Notes
 
 1. The port 8080 in your machine must be free
